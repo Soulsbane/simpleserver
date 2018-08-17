@@ -1,0 +1,8 @@
+name "simpleserver"
+description "A simple server object.."
+copyright "Copyright © 2018"
+authors "Paul Crane"
+targetType "library"
+configuration "library" {
+	targetType "library"
+}
