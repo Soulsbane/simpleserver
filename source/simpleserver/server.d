@@ -56,20 +56,3 @@ class SimpleServer
 		Socket server;
 		bool isRunning;
 }
-
-@("Test SimpleServer")
-unittest
-{
-	class TestServer : SimpleServer
-	{
-		override void onCommand(string[] commands)
-		{
-			writeln(commands);
-		}
-	}
-
-	auto server = new TestServer;
-	server.start();
-	server.stop();
-
-}
