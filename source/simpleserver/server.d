@@ -5,7 +5,7 @@ import std.socket;
 import std.conv;
 import std.array;
 
-class Server
+class SimpleServer
 {
 	this()
 	{
@@ -25,7 +25,7 @@ class Server
 			auto received = client.receive(buffer);
 			string msg = to!string(buffer[0..received]);
 
-			onMessage(msg.split);
+			onCommand(msg.split);
 
 			client.shutdown(SocketShutdown.BOTH);
 			client.close();
@@ -37,7 +37,7 @@ class Server
 		}
 	}
 
-	abstract void onCommand(string[] command);
+	abstract void onCommand(string[] commands);
 	// Add command in the form of
 	// Command ex quit.
 	// Command subcommand.
@@ -47,4 +47,20 @@ class Server
 		ushort port_ = 5899;
 		immutable ushort BUFFER_SIZE = 1024;
 		Socket server;
+}
+
+@("Test SimpleServer")
+unittest
+{
+	class TestServer : SimpleServer
+	{
+		override void onCommand(string[] commands)
+		{
+			writeln(commands);
+		}
+	}
+
+	auto server = new TestServer;
+	server.start();
+
 }
