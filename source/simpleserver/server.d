@@ -3,7 +3,7 @@ module simpleserver.server;
 import std.stdio;
 import std.socket;
 import std.conv;
-
+import std.array;
 
 class Server
 {
@@ -25,8 +25,7 @@ class Server
 			auto received = client.receive(buffer);
 			string msg = to!string(buffer[0..received]);
 
-			writefln("The client said:\n%s", msg);
-
+			onMessage(msg.split);
 
 			client.shutdown(SocketShutdown.BOTH);
 			client.close();
@@ -37,6 +36,12 @@ class Server
 			}
 		}
 	}
+
+	abstract void onCommand(string[] command);
+	// Add command in the form of
+	// Command ex quit.
+	// Command subcommand.
+	// Command subcommand value. ex add location /home
 
 	private:
 		ushort port_ = 5899;
