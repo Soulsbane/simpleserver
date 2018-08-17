@@ -18,7 +18,9 @@ class SimpleServer
 
 	void start()
 	{
-		while(true)
+		isRunning = true;
+
+		while(isRunning)
 		{
 			Socket client = server.accept();
 			char[BUFFER_SIZE] buffer;
@@ -32,9 +34,14 @@ class SimpleServer
 
 			if(msg == "quit")
 			{
-				break;
+				stop();
 			}
 		}
+	}
+
+	void stop()
+	{
+		isRunning = false;
 	}
 
 	abstract void onCommand(string[] commands);
@@ -47,6 +54,7 @@ class SimpleServer
 		ushort port_ = 5899;
 		immutable ushort BUFFER_SIZE = 1024;
 		Socket server;
+		bool isRunning;
 }
 
 @("Test SimpleServer")
@@ -62,5 +70,6 @@ unittest
 
 	auto server = new TestServer;
 	server.start();
+	server.stop();
 
 }
