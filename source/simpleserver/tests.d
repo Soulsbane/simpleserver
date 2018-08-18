@@ -16,7 +16,11 @@ unittest
 	}
 
 	auto server = new TestServer;
-	//server.start();
-	//server.stop();
+	server.start();
 
+	// NOTE: Since SimpleServer blocks we will never make it here. This is more an example than a test.
+	auto client = new SimpleClient;
+	client.connect();
+	client.send("quit");
+	server.stop();
 }
