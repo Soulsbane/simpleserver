@@ -9,20 +9,20 @@ class SimpleServer
 {
 	this()
 	{
-		server = new TcpSocket();
+		server_ = new TcpSocket();
 
-		server.setOption(SocketOptionLevel.SOCKET, SocketOption.REUSEADDR, true);
-		server.bind(new InternetAddress(port_));
-		server.listen(1);
+		server_.setOption(SocketOptionLevel.SOCKET, SocketOption.REUSEADDR, true);
+		server_.bind(new InternetAddress(port_));
+		server_.listen(1);
 	}
 
 	void start()
 	{
-		isRunning = true;
+		isRunning_ = true;
 
-		while(isRunning)
+		while(isRunning_)
 		{
-			Socket client = server.accept();
+			Socket client = server_.accept();
 			char[BUFFER_SIZE] buffer;
 			auto received = client.receive(buffer);
 			string msg = to!string(buffer[0..received]);
@@ -41,7 +41,7 @@ class SimpleServer
 
 	void stop()
 	{
-		isRunning = false;
+		isRunning_ = false;
 	}
 
 	abstract void onCommand(string[] commands);
@@ -53,6 +53,6 @@ class SimpleServer
 	private:
 		ushort port_ = 5899;
 		immutable ushort BUFFER_SIZE = 1024;
-		Socket server;
-		bool isRunning;
+		Socket server_;
+		bool isRunning_;
 }
