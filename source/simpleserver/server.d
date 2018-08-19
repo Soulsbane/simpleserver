@@ -44,7 +44,7 @@ class SimpleServer
 		isRunning_ = false;
 	}
 
-	abstract void onCommand(string[] commands);
+	abstract void onCommand(const string[] commands);
 	// Add command in the form of
 	// Command ex quit.
 	// Command subcommand.
