@@ -1,8 +1,9 @@
 module simpleserver.command;
 
+import std.array;
 import simpleserver.server;
 
-class CommandServer
+class CommandServer : SimpleServer
 {
 	void onCommand(const string[] commands)
 	{
@@ -20,6 +21,11 @@ class CommandServer
 		default:
 			onNoCommands();
 		}
+	}
+
+	override void onMessage(const string msg)
+	{
+		onCommand(msg.split);
 	}
 
 	abstract void onCommand(const string command);

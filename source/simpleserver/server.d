@@ -3,7 +3,6 @@ module simpleserver.server;
 import std.stdio;
 import std.socket;
 import std.conv;
-import std.array;
 
 class SimpleServer
 {
@@ -39,13 +38,7 @@ class SimpleServer
 		isRunning_ = false;
 	}
 
-	void onMessage(const string msg)
-	{
-		if(msg == "quit")
-		{
-			stop();
-		}
-	}
+	abstract void onMessage(const string msg);
 
 	private:
 		ushort port_ = 5899;
