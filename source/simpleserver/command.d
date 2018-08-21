@@ -6,7 +6,7 @@ class CommandServer
 {
 	void onCommand(const string[] commands)
 	{
-		switch (commands.length)
+		switch(commands.length)
 		{
 		case 1:
 			onCommand(commands[0]);
