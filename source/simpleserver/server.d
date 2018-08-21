@@ -27,15 +27,10 @@ class SimpleServer
 			auto received = client.receive(buffer);
 			string msg = to!string(buffer[0..received]);
 
-			onCommand(msg.split);
-
 			client.shutdown(SocketShutdown.BOTH);
 			client.close();
 
-			if(msg == "quit")
-			{
-				stop();
-			}
+			onMessage(msg);
 		}
 	}
 
@@ -44,11 +39,13 @@ class SimpleServer
 		isRunning_ = false;
 	}
 
-	abstract void onCommand(const string[] commands);
-	// Add command in the form of
-	// Command ex quit.
-	// Command subcommand.
-	// Command subcommand value. ex add location /home
+	void onMessage(const string msg)
+	{
+		if(msg == "quit")
+		{
+			stop();
+		}
+	}
 
 	private:
 		ushort port_ = 5899;

@@ -9,9 +9,9 @@ unittest
 {
 	class TestServer : SimpleServer
 	{
-		override void onCommand(string[] commands)
+		override void onMessage(const string msg)
 		{
-			writeln(commands);
+			writeln(msg);
 		}
 	}
 
