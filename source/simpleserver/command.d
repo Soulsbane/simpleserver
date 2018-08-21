@@ -9,17 +9,17 @@ class CommandServer : SimpleServer
 	{
 		switch(commands.length)
 		{
-		case 1:
-			onCommand(commands[0]);
-			break;
-		case 2:
-			onCommand(commands[0], commands[1]);
-			break;
-		case 3:
-			onCommand(commands[0], commands[1], commands[2]);
-			break;
-		default:
-			onNoCommands();
+			case 1:
+				onCommand(commands[0]);
+				break;
+			case 2:
+				onCommand(commands[0], commands[1]);
+				break;
+			case 3:
+				onCommand(commands[0], commands[1], commands[2]);
+				break;
+			default:
+				onNoCommands();
 		}
 	}
 
