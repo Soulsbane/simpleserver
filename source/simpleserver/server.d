@@ -43,6 +43,6 @@ class SimpleServer
 	private:
 		ushort port_ = 5899;
 		immutable ushort BUFFER_SIZE = 1024;
-		Socket server_;
+		TcpSocket server_;
 		bool isRunning_;
 }

@@ -27,5 +27,5 @@ class SimpleClient
 	}
 
 private:
-	Socket client_;
+	TcpSocket client_;
 }
