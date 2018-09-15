@@ -2,6 +2,7 @@ module simpleserver.client;
 
 import std.stdio;
 import std.socket;
+import std.conv;
 
 class SimpleClient
 {
@@ -15,9 +16,23 @@ class SimpleClient
 		client_.connect(new InternetAddress(port));
 	}
 
-	void send(const string message)
+	void send(const string message, bool waitForReceive = true)
 	{
 		client_.send(message);
+
+		if(waitForReceive)
+		{
+			receive();
+		}
+	}
+
+	void receive()
+	{
+		char[BUFFER_SIZE] buffer;
+		auto received = client_.receive(buffer);
+		string msg = to!string(buffer[0..received]);
+
+		onMessage(msg);
 	}
 
 	void disconnect()
@@ -26,6 +41,9 @@ class SimpleClient
 		client_.close();
 	}
 
+	abstract void onMessage(const string msg);
+
 private:
 	TcpSocket client_;
+	immutable ushort BUFFER_SIZE = 1024;
 }

@@ -1,6 +1,8 @@
 module simpleserver.command;
 
 import std.array;
+import std.socket;
+
 import simpleserver.server;
 
 class CommandServer : SimpleServer
@@ -23,7 +25,7 @@ class CommandServer : SimpleServer
 		}
 	}
 
-	override void onMessage(const string msg)
+	override void onMessage(Socket client, const string msg)
 	{
 		onCommand(msg.split);
 	}

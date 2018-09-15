@@ -26,10 +26,11 @@ class SimpleServer
 			auto received = client.receive(buffer);
 			string msg = to!string(buffer[0..received]);
 
+			onMessage(client, msg);
 			client.shutdown(SocketShutdown.BOTH);
 			client.close();
 
-			onMessage(msg);
+			//onMessage(msg);
 		}
 	}
 
@@ -38,7 +39,7 @@ class SimpleServer
 		isRunning_ = false;
 	}
 
-	abstract void onMessage(const string msg);
+	abstract void onMessage(Socket client, const string msg);
 
 	private:
 		ushort port_ = 5899;
