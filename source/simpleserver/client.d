@@ -40,24 +40,24 @@ class SimpleClient
 	}
 
 	/**
-		Receives the message.
-	*/
-	void receive()
-	{
-		char[BUFFER_SIZE] buffer;
-		auto received = client_.receive(buffer);
-		string msg = to!string(buffer[0 .. received]);
-
-		onMessage(msg);
-	}
-
-	/**
 		Disconnect from the server.
 	*/
 	void disconnect()
 	{
 		client_.shutdown(SocketShutdown.BOTH);
 		client_.close();
+	}
+
+	/**
+		Receives the message.
+	*/
+	private void receive()
+	{
+		char[BUFFER_SIZE] buffer;
+		auto received = client_.receive(buffer);
+		string msg = to!string(buffer[0 .. received]);
+
+		onMessage(msg);
 	}
 
 	/**
