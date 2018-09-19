@@ -11,36 +11,58 @@ class SimpleClient
 		client_ = new TcpSocket();
 	}
 
+	/**
+		Connect to a local server.
+
+		Params:
+			port = The port to use. 5899 by default.
+	*/
 	void connect(ushort port = 5899)
 	{
 		client_.connect(new InternetAddress(port));
 	}
 
+	/**
+		Sends a message to server.
+
+		Params:
+			message = The message to send.
+			waitForReceive = Wait for a response message.
+	*/
 	void send(const string message, bool waitForReceive = true)
 	{
 		client_.send(message);
 
-		if(waitForReceive)
+		if (waitForReceive)
 		{
 			receive();
 		}
 	}
 
+	/**
+		Receives the message.
+	*/
 	void receive()
 	{
 		char[BUFFER_SIZE] buffer;
 		auto received = client_.receive(buffer);
-		string msg = to!string(buffer[0..received]);
+		string msg = to!string(buffer[0 .. received]);
 
 		onMessage(msg);
 	}
 
+	/**
+		Disconnect from the server.
+	*/
 	void disconnect()
 	{
 		client_.shutdown(SocketShutdown.BOTH);
 		client_.close();
 	}
 
+	/**
+		Callback for receiving any messages sent to client.
+	*/
 	abstract void onMessage(const string msg);
 
 private:
