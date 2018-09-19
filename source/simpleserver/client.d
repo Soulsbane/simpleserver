@@ -1,11 +1,18 @@
+/**
+	Simple client for connecting to a SimpleServer.
+*/
 module simpleserver.client;
 
 import std.stdio;
 import std.socket;
 import std.conv;
 
+/**
+	Simple client for connecting to a SimpleServer.
+*/
 class SimpleClient
 {
+	///
 	this()
 	{
 		client_ = new TcpSocket();
