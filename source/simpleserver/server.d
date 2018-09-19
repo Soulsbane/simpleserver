@@ -1,9 +1,15 @@
+/**
+	A server that connects to the local network.
+*/
 module simpleserver.server;
 
 import std.stdio;
 import std.socket;
 import std.conv;
 
+/**
+	A server that connects to the local network.
+*/
 class SimpleServer
 {
 	///Basic setup
