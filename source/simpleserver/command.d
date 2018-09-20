@@ -39,8 +39,7 @@ class CommandServer : SimpleServer
 
 	abstract void onCommand(Socket client, const string command);
 	abstract void onCommand(Socket client, const string command, const string subCommand);
-	abstract void onCommand(Socket client, const string command,
-			const string subCommand, const string value);
+	abstract void onCommand(Socket client, const string command, const string subCommand, const string value);
 	abstract void onNoCommands();
 	// Add command in the form of
 	// Command example: quit.
