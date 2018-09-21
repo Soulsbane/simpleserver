@@ -40,7 +40,7 @@ class SimpleClient
 	{
 		client_.send(message);
 
-		if (waitForReceive)
+		if(waitForReceive)
 		{
 			receive();
 		}
