@@ -29,7 +29,7 @@ class SimpleServer
 	{
 		isRunning_ = true;
 
-		while (isRunning_)
+		while(isRunning_)
 		{
 			Socket client = server_.accept();
 			char[BUFFER_SIZE] buffer;
