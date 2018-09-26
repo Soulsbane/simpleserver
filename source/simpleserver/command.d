@@ -37,10 +37,42 @@ class CommandServer : SimpleServer
 		onCommand(client, msg.split);
 	}
 
+	/**
+		Processes a command sent from a client.
+
+		Params:
+			client = The client that sent the command.
+			command = The command.
+	*/
 	abstract void onCommand(Socket client, const string command);
+
+	/**
+		Processes a command sent from a client.
+
+		Params:
+			client = The client that sent the command.
+			command = The command.
+			subcommand = The subcommand.
+	*/
+
 	abstract void onCommand(Socket client, const string command, const string subCommand);
+	/**
+		Processes a command sent from a client.
+
+		Params:
+			client = The client that sent the command.
+			command = The command.
+			subcommand = The subcommand.
+			value = The value of the subcommand.
+	*/
+
 	abstract void onCommand(Socket client, const string command, const string subCommand, const string value);
+
+	/**
+		Called if no arguments are sent.
+	*/
 	abstract void onNoCommands();
+
 	// Add command in the form of
 	// Command example: quit.
 	// Command subcommand example:
