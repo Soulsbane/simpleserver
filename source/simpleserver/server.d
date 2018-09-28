@@ -5,6 +5,8 @@ module simpleserver.server;
 
 import std.stdio;
 import std.conv;
+
+public import std.typecons;
 public import std.socket;
 
 /**
@@ -24,8 +26,11 @@ class SimpleServer
 
 	/**
 		Starts the server using port 5899 by default.
+
+		Params:
+			handleQuit = Shuts down the server when a "quit" message is sent. No.handleQuit by default.
 	*/
-	void start()
+	void start(Flag!"handleQuit" handleQuit = No.handleQuit)
 	{
 		isRunning_ = true;
 
@@ -39,6 +44,11 @@ class SimpleServer
 			onMessage(client, msg);
 			client.shutdown(SocketShutdown.BOTH);
 			client.close();
+
+			if(msg == "quit" && handleQuit)
+			{
+				stop();
+			}
 		}
 	}
 
