@@ -4,8 +4,8 @@
 module simpleserver.server;
 
 import std.stdio;
-import std.socket;
 import std.conv;
+public import std.socket;
 
 /**
 	A server that connects to the local network.
