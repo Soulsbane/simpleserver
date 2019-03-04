@@ -58,6 +58,7 @@ class SimpleServer
 	void stop()
 	{
 		isRunning_ = false;
+		server_.close();
 	}
 
 	/**
