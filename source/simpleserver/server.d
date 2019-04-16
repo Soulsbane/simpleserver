@@ -33,6 +33,7 @@ class SimpleServer
 	void start(Flag!"handleQuit" handleQuit = No.handleQuit)
 	{
 		isRunning_ = true;
+		onStart();
 
 		while(isRunning_)
 		{
@@ -59,6 +60,7 @@ class SimpleServer
 	{
 		isRunning_ = false;
 		server_.close();
+		onStop();
 	}
 
 	/**
@@ -69,6 +71,8 @@ class SimpleServer
 			msg = The message that was sent.
 	*/
 	abstract void onMessage(Socket client, const string msg);
+	void onStart() {}
+	void onStop() {}
 
 private:
 	ushort port_ = 5899;
